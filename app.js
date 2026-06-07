@@ -79,6 +79,14 @@
         <div style="font-size:1.5rem;font-weight:800;color:var(--maroon);margin-top:2px">${esc(countdown)}</div>
       </div>`;
 
+    // backup nudge — localStorage is per-device, so encourage exports
+    const lb = m.lastBackup;
+    const days = lb ? E.daysBetween(lb, today) : null;
+    if (!lb || days >= 3) {
+      const msg = lb ? `Last backup was ${days} day${days === 1 ? "" : "s"} ago.` : "Your data isn't backed up yet — it lives only on this device.";
+      h += `<div class="alert ${lb ? "warn" : "danger"}"><span class="ic">💾</span><div style="flex:1">${esc(msg)} <button class="linkbtn" data-export style="padding:2px 0;font-weight:700">Export backup now →</button></div></div>`;
+    }
+
     h += `<div class="section-title">Open flags</div>`;
     if (!flags.length) h += `<div class="alert ok"><span class="ic">✓</span><div>Nothing flagged right now.</div></div>`;
     flags.forEach((f) => {
@@ -436,7 +444,8 @@
     h += `<div class="tiny muted" style="margin-top:6px">Tap a contact to add/edit its number. The Cega 24h assistance line is on your insurance certificate.</div></div>`;
 
     // ---- Source documents ----
-    h += `<div class="card"><h3>🗂 Source documents</h3>`;
+    h += `<div class="card"><h3>🗂 Source documents</h3>
+      <a class="btn ghost sm" href="https://drive.google.com/drive/my-drive" target="_blank" rel="noopener" style="margin:2px 0 8px">📂 Open Google Drive</a>`;
     const groups = {};
     d.documents.forEach((doc) => { (groups[doc.group] = groups[doc.group] || []).push(doc); });
     Object.keys(groups).forEach((g) => {
@@ -449,7 +458,7 @@
           <button class="linkbtn" data-edit-doc="${esc(doc.id)}">link</button></div>`;
       });
     });
-    h += `<div class="tiny muted" style="margin-top:8px">Local links open the PDF when this app runs from the Google&nbsp;Drive folder on a computer. Tap <b>link</b> to paste each file's Drive “Share → Copy link” URL so it opens on your phone too.</div></div>`;
+    h += `<div class="tiny muted" style="margin-top:8px">Tap <b>📂 Open Google Drive</b>, find a file, do <b>Share → Copy link</b>, then tap <b>link</b> on that row and paste it (a full URL or just the file ID both work). It then opens on your phone too.</div></div>`;
 
     // ---- Draft emails ----
     h += `<div class="section-title">Emails to send</div>`;
@@ -679,12 +688,20 @@
       [{ key: "label", label: "Label", type: "text" }, { key: "value", label: "Number / URL", type: "text" }],
       c, (v) => { Object.assign(c, v); Store.commit(); });
   }
+  function normalizeDriveLink(s) {
+    s = (s || "").trim();
+    if (!s) return "";
+    if (/^https?:\/\//i.test(s)) return s;                       // already a URL
+    if (/^[A-Za-z0-9_-]{15,}$/.test(s))                          // a bare Drive file ID
+      return "https://drive.google.com/file/d/" + s + "/view?usp=sharing";
+    return s;
+  }
   function editDoc(doc) {
     openForm("Document link",
       [{ key: "label", label: "Label", type: "text" },
-       { key: "driveLink", label: "Google Drive share URL", type: "text", placeholder: "Drive → Share → Copy link" },
+       { key: "driveLink", label: "Google Drive link or file ID", type: "text", placeholder: "paste Share→Copy link, or the file ID" },
        { key: "localLink", label: "Local path (fallback)", type: "text" }],
-      doc, (v) => { Object.assign(doc, v); Store.commit(); });
+      doc, (v) => { v.driveLink = normalizeDriveLink(v.driveLink); Object.assign(doc, v); Store.commit(); });
   }
   function editEmail(em) {
     openForm("Edit draft email",
@@ -726,6 +743,11 @@
   /* ---------- boot ---------- */
   if (!App.visitsTab) App.visitsTab = "visits";
   render();
+
+  // ask the browser to keep our localStorage durable (reduces eviction, esp. iOS)
+  if (navigator.storage && navigator.storage.persist) {
+    navigator.storage.persisted().then((p) => { if (!p) navigator.storage.persist().catch(() => {}); }).catch(() => {});
+  }
 
   // service worker (enhancement; only over http/https)
   if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {

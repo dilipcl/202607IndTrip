@@ -53,6 +53,9 @@
   }
 
   function exportJSON() {
+    // record the backup date so the Home screen can nudge when it's stale
+    Store.data.meta.lastBackup = Engine.todayIso();
+    commit();
     const blob = new Blob([JSON.stringify(Store.data, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
