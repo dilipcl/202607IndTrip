@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+  <meta name="theme-color" content="#7a1f2b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Kerala 2026">
+  <title>Kerala 2026 · Trip Companion</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="row">
+      <div>
+        <h1>Kerala 2026</h1>
+        <div class="sub">Family Trip Companion · 27 Jul – 17 Aug</div>
+      </div>
+      <span class="ref" id="bookingRef" style="display:none"></span>
+    </div>
+  </header>
+
+  <main id="app"><!-- rendered by app.js --></main>
+
+  <nav class="tabbar" id="tabbar">
+    <button data-tab="home"><span class="ic">🏠</span>Home</button>
+    <button data-tab="plan"><span class="ic">🗓️</span>Plan</button>
+    <button data-tab="tasks"><span class="ic">✓</span>Tasks</button>
+    <button data-tab="social"><span class="ic">🥂</span>Social</button>
+    <button data-tab="visits"><span class="ic">🛕</span>Visits</button>
+    <button data-tab="budget"><span class="ic">💷</span>Budget</button>
+    <button data-tab="docs"><span class="ic">📄</span>Docs</button>
+  </nav>
+
+  <!-- classic scripts (no ES modules) so the app also runs from file:// -->
+  <script src="./seed.js"></script>
+  <script src="./engine.js"></script>
+  <script src="./state.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

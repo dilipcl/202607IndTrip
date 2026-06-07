@@ -1,0 +1,31 @@
+# ── NEVER commit personal data ──────────────────────────────────────────────
+# Your real trip data (import it on your device instead — see README).
+my-trip-data.private.json
+*.private.json
+*.private.js
+
+# App backups exported from the Docs → Data screen.
+kerala2026-backup-*.json
+
+# Provenance report — contains the real extracted data (PAN, PNRs, policy, etc.).
+# Kept as a private local reference; never published.
+BUILD_REPORT.md
+
+# Source PDFs (tickets, ERS, hotel, Homa, insurance) — keep these in Google
+# Drive, never in a public repo. These patterns also protect you if you ever
+# put the repo at the parent (Jul-India) folder level.
+*.pdf
+Flight tickets/
+Mookambika/
+travel insurance/
+
+# Local scratch / test harnesses
+_smoke.html
+_shot.html
+_export.html
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
