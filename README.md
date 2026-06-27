@@ -10,7 +10,7 @@ you add or edit is saved on your phone.
 ## What's inside (7 tabs)
 - **🏠 Home** — countdown, live flags (FCDO/insurance, school-friends, leave-Kollur), today's fixed items, all reminders.
 - **🗓️ Plan** — day-by-day 27 Jul→17 Aug. Fixed anchors (flights/trains/Homa/hotel) are **🔒 locked** and visually distinct; tap **+ Add** on any day to drop in your own plans.
-- **✓ Tasks** — pre-trip packing + the **OPEN verification tasks** (insurance/FCDO, Homa entry & ages, hotel occupancy, Worldwide cover).
+- **✓ Tasks** — four grouped sections: **🔎 Verification** (insurance/Worldwide cover, post-advisory FCDO check, Gulf-airspace check before the return, Homa entry & ages, hotel occupancy, kids' passport re-issue), **🧳 Pre-trip packing**, **🩺 Health & monsoon precautions** (safe water/food, dengue/mosquito, pre-travel vaccinations), and **🛂 Kids' passport re-issue** — a 5-step mini-list (apply → PSK appointment → attend → Speed Post → update UKVI eVisa).
 - **🥂 Social** — Trivandrum catch-ups with **scheduling intelligence** (weekday/Sunday/anchor-clash warnings) and a **transport rule engine** (drinks → Taxi only; self-drive locked).
 - **🛕 Visits** — temple/relatives + a **gifts** planner; the Kottarakkara + Mathoor circuit recommends **full-day car + driver**. Includes the self-drive opt-in card.
 - **💷 Budget** — planned vs actual, **dual currency ₹/£** with an editable rate, per-line bars and roll-up totals, plus financial-admin tasks.
@@ -25,11 +25,26 @@ the Drive URLs — this session's Drive access wasn't authorised for it — so t
 for you to paste once and they persist.)*
 
 ### Draft emails
-The Docs tab also holds ready drafts for the open verification items — **insurance DXB
-coverage check**, **Homa group entry & ages**, **hotel 13-guest occupancy**. Each has
-**Copy** and **Open in mail** buttons, and all are editable. The same three have also
-been created as **Gmail drafts** (addressed to you for review — set the real recipient
-before sending; the intended recipient is noted at the top of each).
+The Docs tab also holds ready drafts for the open verification items — **insurance
+Worldwide-cover / DXB transit check**, **Homa group entry & ages**, **hotel 13-guest
+occupancy**, plus an **Annexure-D parental-consent** sheet for the kids' passport
+re-issue (not an email — **Copy**, paste, print, both parents sign). Each has **Copy**
+and **Open in mail** buttons, and all are editable. The first three have also been
+created as **Gmail drafts** (addressed to you for review — set the real recipient before
+sending; the intended recipient is noted at the top of each).
+
+### Travel-conditions & passport updates (Jun 2026)
+- **FCDO / UAE:** the all-but-essential warning was **lifted 18 Jun 2026** (reversible),
+  so the insurance items now ask the insurer for **Worldwide cover** and the position if
+  the advisory is **reinstated mid-trip**, rather than airside-transit cover.
+- **Gulf airspace:** an alert tracks the US–Iran ceasefire window (~16 Aug) against the
+  **17 Aug Dubai-transit return** — re-check the advisory and Emirates ops before flying.
+- **Monsoon:** a warning covers flood/landslide risk on the **2–5 Aug Kollur leg**
+  (build extra road-time buffer); plus the **Health** tasks above.
+- **Kids' passports:** both children's Indian passports expire **27 Jul 2027** — eligible
+  to re-issue from ~27 Jul 2026 and far cheaper in India. The **Passport** task list and
+  Annexure-D draft walk through doing it at **PSK Trivandrum on Tatkal**, with the
+  must-not-miss step of **re-linking the new passport numbers to the UKVI eVisa**.
 
 ## Run it on a computer (to preview)
 Just double-click **`index.html`** — it opens in your browser and is fully usable
