@@ -144,7 +144,7 @@ window.SEED = {
     geographical: "Worldwide OR European (must be Worldwide for India) — CONFIRM on the certificate.",
     assistanceProvider: "Cega (24h emergency assistance)",
     assistancePhone: "",
-    fcdoExclusion: "No cover for travel to or within areas the FCDO advises against ‘all’ or ‘all but essential’ travel. The trip transits Dubai (UAE) both ways — see the open insurance task.",
+    fcdoExclusion: "No cover for travel to or within areas the FCDO advises against ‘all’ or ‘all but essential’ travel. UPDATE: the UAE all-but-essential warning was LIFTED on 18 Jun 2026 following the US–Iran ceasefire MoU — the Dubai-transit cover worry is largely eased, BUT it is reversible at short notice. Confirm Worldwide cover in writing and re-check the advisory before both the 27 Jul and 17 Aug legs.",
     pandemicNote: "Cancellation losses from an epidemic/pandemic are excluded, except a positive COVID-19 diagnosis within 14 days of travel.",
   },
 
@@ -189,8 +189,8 @@ window.SEED = {
   /* ---- Pre-trip checklist + OPEN verification tasks ----------------------- */
   checklist: [
     { id: "v_fcdo", cat: "Verify", priority: "high", status: "open",
-      title: "Insurer confirmation: airside DXB transit covered under FCDO advisory",
-      note: "FCDO advises against all-but-essential travel to the UAE; the policy voids cover for FCDO-advised destinations. Get WRITTEN insurer confirmation that airside Dubai transit is covered, and monitor gov.uk/foreign-travel-advice/united-arab-emirates. Do NOT assume coverage." },
+      title: "Insurer confirmation: Worldwide cover + Dubai transit (post-advisory-lift)",
+      note: "UPDATE: FCDO LIFTED the all-but-essential UAE warning on 18 Jun 2026, so the transit-cover worry is largely resolved — but it is reversible 'at short notice'. Get WRITTEN insurer confirmation that (a) cover is Worldwide for India and (b) cover (incl. Dubai airside transit) still holds if the UAE advisory is reinstated while you are mid-trip. Keep monitoring gov.uk/foreign-travel-advice/united-arab-emirates." },
     { id: "v_fcdo_monitor", cat: "Verify", priority: "high", status: "open",
       title: "Monitor FCDO UAE advisory before travel",
       note: "gov.uk/foreign-travel-advice/united-arab-emirates — re-check close to 27 Jul and 17 Aug." },
@@ -206,6 +206,12 @@ window.SEED = {
     { id: "v_geo", cat: "Verify", priority: "high", status: "open",
       title: "Insurance: confirm geographical cover = Worldwide",
       note: "India needs Worldwide (not European). Also note the policy covers only the 4 UK travellers." },
+    { id: "v_airspace", cat: "Verify", priority: "high", status: "open",
+      title: "Gulf airspace / ceasefire status before the 17 Aug return",
+      note: "The US–Iran ceasefire MoU (signed 17 Jun 2026) runs ~60 days to ~16 Aug 2026 — the day before the Dubai-transit return. Region is calmer (UAE FCDO warning lifted 18 Jun) but 'could resume at short notice'. Re-check the UAE advisory + Emirates operations near 17 Aug, and know Emirates' rebooking/reroute policy. Return fares are Saver (date change ≈ USD 25/pax)." },
+    { id: "v_passport", cat: "Verify", priority: "high", status: "open",
+      title: "Re-issue kids' Indian passports in Trivandrum",
+      note: "Both children's passports expire 27 Jul 2027 — eligible to re-issue from ~27 Jul 2026 (within 1 year) and far cheaper in India. Apply online at passportindia.gov.in on arrival, book the earliest PSK Trivandrum appointment, use TATKAL (dispatch 1–3 working days) so the new books arrive before the 17 Aug departure. Both parents attend + Annexure-D consent → usually NO police verification for minors. Old passport is returned cancelled — carry BOTH passports home (UK visa vignette is in the old one) and UPDATE the UKVI eVisa account with the new passport numbers before flying back." },
     { id: "c_attire", cat: "Pack", priority: "normal", status: "open", title: "Temple attire (Homa dress code)",
       note: "Male: dhoti + shirt/kurta. Female: saree / half-saree / churidar + dupatta. For all attending." },
     { id: "c_meds", cat: "Pack", priority: "normal", status: "open", title: "Medication with original labels/prescriptions",
@@ -217,6 +223,22 @@ window.SEED = {
       note: "For the 16 Aug audit — 30kg checked + cabin 115cm linear on the India-boarding return." },
     { id: "c_ids", cat: "Pack", priority: "normal", status: "open", title: "Original photo ID for every train passenger",
       note: "IRCTC requires original ID (Aadhaar/passport/PAN/etc.) matching the ERS for all 13." },
+    { id: "c_water", cat: "Health", priority: "normal", status: "open", title: "Monsoon health: safe water & food",
+      note: "Peak SW monsoon = dengue, leptospirosis, hepatitis A, Shigella and a confirmed Nipah case active in Kerala in 2026. Bottled/boiled water only; hot freshly-cooked food; strict hand hygiene. Highest risk for the four elders, the youngest child and the two diabetic travellers." },
+    { id: "c_mosquito", cat: "Health", priority: "normal", status: "open", title: "Mosquito repellent + dengue precautions",
+      note: "DEET repellent, cover up at dawn/dusk, plug-in/coil at night. Dengue & chikungunya peak in the monsoon." },
+    { id: "c_vax", cat: "Health", priority: "normal", status: "open", title: "Pre-travel vaccination check (4 UK travellers)",
+      note: "Confirm Hepatitis A + typhoid (and routine boosters) before 27 Jul. Confirm the insurance includes medical evacuation — only the 4 UK travellers are covered, not the 9 India relatives." },
+    { id: "pp1", cat: "Passport", priority: "high", status: "open", title: "1. Apply online — passportindia.gov.in",
+      note: "Register, choose Re-issue → 'Validity expiring', fill ONE form per child, select TATKAL, pay. Do this in the first days (target ~28–29 Jul) so it clears before 17 Aug." },
+    { id: "pp2", cat: "Passport", priority: "high", status: "open", title: "2. Book PSK Trivandrum appointment",
+      note: "Book the earliest slot at PSK/RPO Thiruvananthapuram. Print the application receipt and the Annexure-D consent (see 'Emails to send' → Annexure-D), signed by both parents." },
+    { id: "pp3", cat: "Passport", priority: "high", status: "open", title: "3. Attend PSK — both parents + originals",
+      note: "Bring: both children's ORIGINAL passports; both parents' passports + self-attested copies; address proof (parent's Aadhaar/passport showing the India address); signed Annexure-D. Photos/biometrics taken on-site. Both parents present → usually no police verification for minors. Birth certificates NOT needed (children born before Oct 2023)." },
+    { id: "pp4", cat: "Passport", priority: "normal", status: "open", title: "4. Receive new passports (Speed Post)",
+      note: "Dispatched 1–3 working days after the appointment to the India address — NOT collected. Track on Passport Seva. FALLBACK: arrange a relative at that address to receive them (and courier to the UK) in case they arrive after 17 Aug." },
+    { id: "pp5", cat: "Passport", priority: "high", status: "open", title: "5. Update UKVI eVisa + carry old passports home",
+      note: "CRITICAL before flying 17 Aug: log into each child's UKVI account and update the passport number — the eVisa does NOT auto-transfer and airline/border checks match it. Carry BOTH passports (the old cancelled one holds the UK visa vignette)." },
   ],
 
   /* ---- Social & activities (TVM) ----------------------------------------- */
@@ -301,7 +323,13 @@ window.SEED = {
     { id: "al_sd4", title: "SmartDelay: register EK029 (DXB→LHR)", due: "2026-08-16", kind: "smartdelay",
       note: "≥24h before the 17 Aug return." },
     { id: "al_fcdo", title: "FCDO/insurance check (DXB transit)", due: "2026-07-20", kind: "verify",
-      note: "Get written insurer confirmation + monitor the UAE advisory." },
+      note: "UAE all-but-essential warning LIFTED 18 Jun 2026 (reversible). Get written confirmation of Worldwide cover + what happens if the advisory is reinstated mid-trip; keep monitoring." },
+    { id: "al_passport", title: "Apply: kids' passport re-issue (Trivandrum, Tatkal)", due: "2026-07-29", kind: "admin",
+      note: "Apply online + book the earliest PSK Trivandrum appointment in the first days of the trip; use Tatkal so the books dispatch before 17 Aug. Both parents + old passports + Annexure-D. Then update the UKVI eVisa with the new numbers." },
+    { id: "al_monsoon", title: "Monsoon/landslide risk — Kollur leg (2–5 Aug)", due: "2026-08-01", kind: "warning",
+      note: "Peak SW monsoon; IMD red alerts seen for Kasaragod/coastal Karnataka & the Western Ghats. Build extra road-time buffer MAQ↔Kollur and Kollur→Kasaragod, check IMD/road status, keep meds in day bags." },
+    { id: "al_airspace", title: "Gulf airspace / Dubai transit check before return", due: "2026-08-15", kind: "verify",
+      note: "Ceasefire deadline ~16 Aug, the day before the 17 Aug Dubai-transit return. Re-check the UAE advisory + Emirates operations; know rebooking options." },
     { id: "al_school", title: "School-friends catch-up scheduled?", due: "2026-07-31", kind: "social",
       note: "Must be slotted 29–31 Jul before classmates leave TVM." },
     { id: "al_kollur", title: "Leave Kollur by 10:00", due: "2026-08-05", kind: "warning",
@@ -345,15 +373,15 @@ window.SEED = {
   emails: [
     { id: "em_cover", title: "Insurance — DXB transit cover check", to: "",
       toHint: "Crispin Speers / Canopius (your insurer's claims/servicing email)",
-      subject: "Travel policy [policy no.] — written confirmation of airside Dubai (DXB) transit cover under the current UAE FCDO advisory",
+      subject: "Travel policy [policy no.] — written confirmation of Worldwide cover & Dubai (DXB) transit for 27 Jul / 17 Aug 2026 travel",
       body:
 "Dear Crispin Speers / Canopius team,\n\n" +
 "Policy number: [your policy number] (Employee Benefit Travel Insurance).\n\n" +
 "We are four UK-resident travellers flying London–Dubai–Trivandrum and back on 27 July and 17 August 2026 with Emirates (EK012/EK522 outbound, EK523/EK029 return). Both directions transit airside at Dubai International (DXB); we do not leave the airport or enter the UAE.\n\n" +
-"We note the policy excludes cover for travel \"to or within areas to which the FCDO advise against all or all but essential travel,\" and that the FCDO currently advises against all-but-essential travel to the UAE.\n\n" +
+"We note the policy excludes cover for travel \"to or within areas to which the FCDO advise against all or all but essential travel,\" and that the FCDO lifted its all-but-essential warning for the UAE on 18 June 2026, though the regional situation remains volatile and could change at short notice.\n\n" +
 "Please confirm IN WRITING:\n" +
-"1. Whether airside transit through DXB (no landside entry to the UAE) is covered under the policy given the current advisory, or whether any part of cover is voided by the Dubai transit; and\n" +
-"2. That our geographical cover is Worldwide (we are travelling to India).\n\n" +
+"1. That our geographical cover is Worldwide (we are travelling to India); and\n" +
+"2. That cover (including the airside Dubai transit) is valid for this trip, AND the position if the FCDO were to reinstate an all-but-essential advisory for the UAE while we are mid-trip.\n\n" +
 "We would be grateful for written confirmation to keep on file before we travel.\n\n" +
 "Kind regards,\n[Your name]" },
 
@@ -382,6 +410,27 @@ window.SEED = {
 "We arrive late on the night of 02/03 August (after the train to Mangaluru), so we would be grateful if the rooms are held for an early-hours check-in as booked.\n\n" +
 "Thank you.\n\n" +
 "Kind regards,\n[Your name] · [your phone]" },
+
+    { id: "em_annexd", title: "Annexure-D — parental consent (print & sign)", to: "",
+      toHint: "NOT an email — tap Copy, paste into a doc, print, and BOTH parents sign for the PSK appointment (one per child)",
+      subject: "Annexure 'D' — Declaration of Parent/Guardian for issue of passport to a minor",
+      body:
+"ANNEXURE 'D'\n" +
+"DECLARATION OF PARENT/GUARDIAN FOR ISSUE OF PASSPORT TO A MINOR (both parents consenting)\n\n" +
+"We, the parents of the minor named below, give our consent to the issue of a passport to our minor child.\n\n" +
+"Minor's name: ____________________  (fill one form per child)\n" +
+"Date of birth: ____________________\n" +
+"Existing passport no.: ____________________\n\n" +
+"Father's name: ____________________\n" +
+"Father's passport no.: ____________________\n" +
+"Mother's name: ____________________\n" +
+"Mother's passport no.: ____________________\n\n" +
+"Residential address: ____________________\n\n" +
+"We declare that the particulars given above are true and that we have no objection to the issue of a passport to our above-named minor child.\n\n" +
+"Signature of Father: ____________________   Date: __________\n" +
+"Signature of Mother: ____________________   Date: __________\n" +
+"Place: ____________________\n\n" +
+"Note: Use the official Annexure 'D' from passportindia.gov.in if one is provided — this is a prompt sheet to prepare it. Print one per child; both parents sign (in front of the passport officer if asked)." },
   ],
 
   /* ---- Self-drive rental state (default: not recommended) ------------------ */

@@ -236,14 +236,20 @@
 
   /* ============================================================ TASKS / CHECKLIST */
   function renderTasks() {
-    const cats = ["Verify", "Pack"];
+    const cats = ["Verify", "Pack", "Health", "Passport"];
+    const catTitles = {
+      Verify: "🔎 Verification tasks (OPEN)",
+      Pack: "🧳 Pre-trip packing & prep",
+      Health: "🩺 Health & monsoon precautions",
+      Passport: "🛂 Kids' passport re-issue (step by step)",
+    };
     let h = `<div class="section-title">Must-do checklist & verification</div>`;
     const open = D().checklist.filter((c) => c.status !== "done").length;
     h += `<div class="small muted" style="margin:0 2px 10px">${open} open of ${D().checklist.length}</div>`;
     cats.forEach((cat) => {
       const items = D().checklist.filter((c) => c.cat === cat);
       if (!items.length) return;
-      h += `<div class="card"><h3>${cat === "Verify" ? "🔎 Verification tasks (OPEN)" : "🧳 Pre-trip packing & prep"}</h3>`;
+      h += `<div class="card"><h3>${catTitles[cat] || cat}</h3>`;
       items.sort((a, b) => (a.priority === "high" ? -1 : 1) - (b.priority === "high" ? -1 : 1));
       items.forEach((c) => {
         h += `<div class="li">
@@ -600,7 +606,7 @@
     openForm(isNew ? "Add task" : "Edit task",
       [{ key: "title", label: "Task", type: "text" },
        { key: "note", label: "Notes", type: "textarea" },
-       { key: "cat", label: "Group", type: "select", options: ["Verify", "Pack"] },
+       { key: "cat", label: "Group", type: "select", options: ["Verify", "Pack", "Health", "Passport"] },
        { key: "priority", label: "Priority", type: "select", options: ["normal", "high"] }],
       c || { cat: "Pack", priority: "normal" },
       (v) => { if (isNew) { v.id = uid("c"); v.status = "open"; D().checklist.push(v); } else Object.assign(c, v); Store.commit(); },
