@@ -399,6 +399,30 @@
     });
     h += `</div>`;
     h += `<button class="btn ghost full" data-add-budget>+ Add budget line</button>`;
+
+    // NRI status — account conversion tracker
+    const nri = D().nriAccounts || [];
+    const nriDone = nri.filter((a) => a.done).length;
+    h += `<div class="section-title">NRI status — accounts to convert</div>`;
+    h += `<div class="small muted" style="margin:0 2px 10px">${nriDone}/${nri.length} done · pull AIS + MF Central + demat CAS + credit report (see Financial admin above), then add one row per real account. Starter rows carry the NRI action per type — edit or duplicate them.</div>`;
+    nri.forEach((a) => {
+      h += `<div class="card">
+        <div class="li">
+          <span class="check ${a.done ? "on" : ""}" data-toggle-nri="${esc(a.id)}">${a.done ? "✓" : ""}</span>
+          <div class="grow" data-edit-nri="${esc(a.id)}">
+            <div class="inline" style="justify-content:space-between">
+              <div class="ttl">${esc(a.institution || a.kind || "New account")} ${a.holder ? `<span class="chip">${esc(a.holder)}</span>` : ""}</div>
+              <span class="badge ${a.done ? "done" : "open"}">${esc(a.status || "To review")}</span>
+            </div>
+            <div class="small" style="margin-top:2px">${esc(a.kind || "")}${a.ref ? " · " + esc(a.ref) : ""}</div>
+            ${a.action ? `<div class="tiny muted" style="margin-top:4px">${esc(a.action)}</div>` : ""}
+            ${a.notes ? `<div class="tiny" style="margin-top:3px">${esc(a.notes)}</div>` : ""}
+          </div>
+        </div>
+      </div>`;
+    });
+    h += `<button class="btn ghost full" data-add-nri>+ Add account</button>`;
+
     return `<section>${h}</section>`;
   }
 
@@ -577,6 +601,11 @@
     if (A("data-toggle-fin")) { const f = find("finAdmin", A("data-toggle-fin")); f.done = !f.done; Store.commit(); return; }
     if (t.hasAttribute("data-rate")) { editRate(); return; }
 
+    // ---- NRI account tracker ----
+    if (A("data-toggle-nri")) { const a = find("nriAccounts", A("data-toggle-nri")); a.done = !a.done; if (a.done && (!a.status || a.status === "To review")) a.status = "Done"; Store.commit(); return; }
+    if (A("data-edit-nri")) { editNri(find("nriAccounts", A("data-edit-nri"))); return; }
+    if (t.hasAttribute("data-add-nri")) { editNri(null); return; }
+
     // ---- self drive ----
     if (t.hasAttribute("data-selfdrive")) { editSelfDrive(); return; }
 
@@ -673,6 +702,20 @@
       b || { currency: "INR", plannedINR: 0, actualINR: 0, paid: false },
       (v) => { if (isNew) { v.id = uid("b"); D().budget.push(v); } else Object.assign(b, v); Store.commit(); },
       isNew ? null : () => { D().budget = D().budget.filter((x) => x !== b); Store.commit(); });
+  }
+  function editNri(a) {
+    const isNew = !a;
+    openForm(isNew ? "Add account" : "Edit account",
+      [{ key: "holder", label: "Holder", type: "select", options: ["", "Dilip", "Lekshmy", "Joint"] },
+       { key: "kind", label: "Type", type: "select", options: ["Savings/Current", "FD", "Mutual Fund", "Shares/Demat", "Bond/SGB", "Loan", "Credit Card", "PPF", "Post Office", "NPS", "Other"] },
+       { key: "institution", label: "Institution", type: "text" },
+       { key: "ref", label: "Account / folio (optional)", type: "text" },
+       { key: "status", label: "Status", type: "select", options: ["To review", "In progress", "Done", "N/A"] },
+       { key: "action", label: "NRI action", type: "textarea" },
+       { key: "notes", label: "Notes", type: "textarea" }],
+      a || { holder: "", kind: "Savings/Current", status: "To review", done: false },
+      (v) => { if (isNew) { v.id = uid("nri"); v.done = false; D().nriAccounts.push(v); } else Object.assign(a, v); Store.commit(); },
+      isNew ? null : () => { D().nriAccounts = D().nriAccounts.filter((x) => x !== a); Store.commit(); });
   }
   function editRate() {
     openForm("Exchange rate",

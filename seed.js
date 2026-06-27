@@ -310,6 +310,34 @@ window.SEED = {
   finAdmin: [
     { id: "fa_bank", date: "2026-07-30", title: "NRI bank / MF updates", done: false },
     { id: "fa_ca", date: "2026-07-31", title: "CA meeting — rental income", done: false },
+    { id: "fa_ais", date: "", title: "Discovery: download AIS + Form 26AS (both PANs)", done: false },
+    { id: "fa_mfcentral", date: "", title: "Discovery: MF Central consolidated statement (by PAN)", done: false },
+    { id: "fa_cas", date: "", title: "Discovery: NSDL/CDSL demat CAS (shares/bonds)", done: false },
+    { id: "fa_credit", date: "", title: "Discovery: credit report — loans & cards (both)", done: false },
+  ],
+
+  /* ---- NRI status — account conversion tracker ---------------------------- */
+  /* Starter rows carry the NRI action per asset TYPE. Edit/duplicate them into
+     one row per real account once the discovery reports are in. */
+  nriAccounts: [
+    { id: "nri_sav", holder: "", kind: "Savings/Current", institution: "", ref: "", status: "To review", done: false,
+      action: "Redesignate to NRO (or close); open NRE for UK income. Mandatory under FEMA.", notes: "" },
+    { id: "nri_fd", holder: "", kind: "FD", institution: "", ref: "", status: "To review", done: false,
+      action: "Convert resident FD → NRO FD (rate usually honoured to maturity), or break & reinvest as NRE/FCNR.", notes: "" },
+    { id: "nri_mf", holder: "", kind: "Mutual Fund", institution: "", ref: "", status: "To review", done: false,
+      action: "Keep units; update KYC to NRI + redo FATCA; switch bank mandate to NRO/NRE. Use MF Central to list all.", notes: "" },
+    { id: "nri_dmt", holder: "", kind: "Shares/Demat", institution: "", ref: "", status: "To review", done: false,
+      action: "Close resident demat; open NRO (+NRE/PIS) demat; transfer holdings; update PAN status.", notes: "" },
+    { id: "nri_bond", holder: "", kind: "Bond/SGB", institution: "", ref: "", status: "To review", done: false,
+      action: "Move to the NRI demat; SGBs can be held to maturity.", notes: "" },
+    { id: "nri_loan", holder: "", kind: "Loan", institution: "", ref: "", status: "To review", done: false,
+      action: "Inform lender; usually continues, serviced from NRO.", notes: "" },
+    { id: "nri_card", holder: "", kind: "Credit Card", institution: "", ref: "", status: "To review", done: false,
+      action: "Inform issuer; continue or convert to NRI/secured variant.", notes: "" },
+    { id: "nri_ppf", holder: "", kind: "PPF", institution: "", ref: "", status: "To review", done: false,
+      action: "Runs to maturity on existing terms — no extension/new deposits; cannot open a new one.", notes: "" },
+    { id: "nri_post", holder: "", kind: "Post Office", institution: "", ref: "", status: "To review", done: false,
+      action: "Mostly not permitted for NRIs — POSB usually closed; NSC/KVP/SSY/MIS held to maturity then closed. Confirm scheme-by-scheme.", notes: "" },
   ],
 
   /* ---- Alerts / reminders ------------------------------------------------- */
