@@ -404,7 +404,7 @@
     const nri = D().nriAccounts || [];
     const nriDone = nri.filter((a) => a.done).length;
     h += `<div class="section-title">NRI status — accounts to convert</div>`;
-    h += `<div class="small muted" style="margin:0 2px 10px">${nriDone}/${nri.length} done · pull AIS + MF Central + demat CAS + credit report (see Financial admin above), then add one row per real account. Starter rows carry the NRI action per type — edit or duplicate them.</div>`;
+    h += `<div class="small muted" style="margin:0 2px 10px">${nriDone}/${nri.length} done · <b>Order:</b> ① open/redesignate NRO (+NRE) → ② close/convert demat → ③ MF KYC + re-point SIPs → ④ insurance/NPS → ⑤ verify EPF/FD/card/PPF → ⑥ cleanup. Banks &amp; demat are best done in person; pause SIPs before the bank is redesignated.</div>`;
     nri.forEach((a) => {
       h += `<div class="card">
         <div class="li">
