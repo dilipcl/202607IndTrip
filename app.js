@@ -707,7 +707,7 @@
     const isNew = !a;
     openForm(isNew ? "Add account" : "Edit account",
       [{ key: "holder", label: "Holder", type: "select", options: ["", "Dilip", "Lekshmy", "Joint"] },
-       { key: "kind", label: "Type", type: "select", options: ["Savings/Current", "FD", "Mutual Fund", "Shares/Demat", "Bond/SGB", "Loan", "Credit Card", "PPF", "Post Office", "NPS", "Other"] },
+       { key: "kind", label: "Type", type: "select", options: ["Savings/Current", "FD", "Mutual Fund", "Shares/Demat", "Bond/SGB", "Loan", "Credit Card", "PPF", "Post Office", "NPS", "Pension", "Insurance", "Crypto", "Other"] },
        { key: "institution", label: "Institution", type: "text" },
        { key: "ref", label: "Account / folio (optional)", type: "text" },
        { key: "status", label: "Status", type: "select", options: ["To review", "In progress", "Done", "N/A"] },
