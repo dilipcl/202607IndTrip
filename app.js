@@ -405,8 +405,16 @@
     const nriDone = nri.filter((a) => a.done).length;
     h += `<div class="section-title">NRI status — accounts to convert</div>`;
     h += `<div class="small muted" style="margin:0 2px 10px">${nriDone}/${nri.length} done · <b>Order:</b> ① open/redesignate NRO (+NRE) → ② close/convert demat → ③ MF KYC + re-point SIPs → ④ insurance/NPS → ⑤ verify EPF/FD/card/PPF → ⑥ cleanup. Banks &amp; demat are best done in person; pause SIPs before the bank is redesignated.</div>`;
-    nri.forEach((a) => {
-      h += `<div class="card">
+    const nriPhaseTitles = {
+      1: "① Banks — redesignate to NRO/NRE (do first, in person)",
+      2: "② Demat & shares — close/convert (regulatory priority)",
+      3: "③ Mutual funds — KYC→NRI + re-point SIPs",
+      4: "④ Insurance, pension & NPS — notify status",
+      5: "⑤ Verify these gaps",
+      6: "⑥ Cleanup / low priority",
+    };
+    const nriPhaseOf = (a) => { const n = Number(a.phase); return n >= 1 && n <= 6 ? n : 99; };
+    const nriRow = (a) => `<div class="card">
         <div class="li">
           <span class="check ${a.done ? "on" : ""}" data-toggle-nri="${esc(a.id)}">${a.done ? "✓" : ""}</span>
           <div class="grow" data-edit-nri="${esc(a.id)}">
@@ -420,6 +428,11 @@
           </div>
         </div>
       </div>`;
+    [1, 2, 3, 4, 5, 6, 99].forEach((ph) => {
+      const rows = nri.filter((a) => nriPhaseOf(a) === ph);
+      if (!rows.length) return;
+      h += `<div class="small" style="margin:12px 2px 4px;font-weight:600">${ph === 99 ? "Other / unsorted" : nriPhaseTitles[ph]}</div>`;
+      rows.forEach((a) => { h += nriRow(a); });
     });
     h += `<button class="btn ghost full" data-add-nri>+ Add account</button>`;
 
@@ -711,6 +724,7 @@
        { key: "institution", label: "Institution", type: "text" },
        { key: "ref", label: "Account / folio (optional)", type: "text" },
        { key: "status", label: "Status", type: "select", options: ["To review", "In progress", "Done", "N/A"] },
+       { key: "phase", label: "Phase (1–6)", type: "select", options: ["", "1", "2", "3", "4", "5", "6"] },
        { key: "action", label: "NRI action", type: "textarea" },
        { key: "notes", label: "Notes", type: "textarea" }],
       a || { holder: "", kind: "Savings/Current", status: "To review", done: false },
