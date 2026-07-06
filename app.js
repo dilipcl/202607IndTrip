@@ -262,7 +262,40 @@
       h += `</div>`;
     });
     h += `<button class="btn ghost full" data-add-task>+ Add task</button>`;
+    h += renderPackets();
     return `<section>${h}</section>`;
+  }
+
+  /* ---- Document checklists & processes (visa, passports, health…) ---- */
+  function renderPackets() {
+    const packs = D().docPackets || [];
+    let h = `<div class="section-title" style="margin-top:20px">📋 Document checklists & processes</div>`;
+    h += `<div class="small muted" style="margin:0 2px 10px">Doc packs to gather for each admin task. Tap a row to tick it off; tap the row text to edit it, or the card title to edit the process.</div>`;
+    packs.forEach((p) => {
+      const docs = p.docs || [];
+      const req = docs.filter((d) => d.status !== "na");
+      const have = docs.filter((d) => d.status === "have").length;
+      h += `<div class="card">
+        <div class="inline" style="justify-content:space-between;align-items:flex-start;gap:8px">
+          <h3 style="margin:0" data-edit-packet="${esc(p.id)}">${esc(p.icon || "📋")} ${esc(p.title)}</h3>
+          ${p.when ? `<span class="chip admin" style="white-space:nowrap">${esc(p.when)}</span>` : ""}
+        </div>
+        <div class="small muted" style="margin:3px 0 6px">${have}/${req.length} gathered</div>
+        ${p.intro ? `<div class="meta" style="margin-bottom:6px">${nl2br(p.intro)}</div>` : ""}`;
+      docs.forEach((d) => {
+        const na = d.status === "na";
+        h += `<div class="li">
+          <span class="check ${d.status === "have" ? "on" : ""}" data-toggle-pdoc="${esc(p.id)}:${esc(d.id)}"${na ? ' style="opacity:.3"' : ""}>${d.status === "have" ? "✓" : ""}</span>
+          <div class="grow" data-edit-pdoc="${esc(p.id)}:${esc(d.id)}">
+            <div class="ttl"${na ? ' style="text-decoration:line-through;opacity:.6"' : ""}>${esc(d.label)} ${na ? '<span class="badge open">not needed</span>' : ""}</div>
+            ${d.note ? `<div class="meta">${nl2br(d.note)}</div>` : ""}
+          </div></div>`;
+      });
+      h += `<button class="btn ghost sm" data-add-pdoc="${esc(p.id)}" style="margin-top:10px">+ Document</button>`;
+      h += `</div>`;
+    });
+    h += `<button class="btn ghost full" data-add-packet>+ Add checklist</button>`;
+    return h;
   }
 
   /* ============================================================ SOCIAL */
@@ -571,6 +604,8 @@
       + "[data-edit-visit],[data-add-visit],[data-toggle-visit],[data-edit-gift],[data-add-gift],"
       + "[data-toggle-gift-p],[data-toggle-gift-k],[data-edit-budget],[data-add-budget],[data-toggle-fin],"
       + "[data-rate],[data-selfdrive],[data-edit-contact],[data-edit-doc],[data-edit-email],[data-copy-email],"
+      + "[data-toggle-nri],[data-edit-nri],[data-add-nri],"
+      + "[data-toggle-pdoc],[data-edit-pdoc],[data-add-pdoc],[data-edit-packet],[data-add-packet],"
       + "[data-export],[data-import],[data-reset]");
     if (!t) return;
     const A = (k) => t.getAttribute(k);
@@ -619,6 +654,13 @@
     if (A("data-edit-nri")) { editNri(find("nriAccounts", A("data-edit-nri"))); return; }
     if (t.hasAttribute("data-add-nri")) { editNri(null); return; }
 
+    // ---- document checklists / packets ----
+    if (A("data-toggle-pdoc")) { const d = findPdoc(A("data-toggle-pdoc")); if (d) { d.status = d.status === "have" ? "need" : "have"; Store.commit(); } return; }
+    if (A("data-edit-pdoc")) { const r = findPdoc(A("data-edit-pdoc"), true); if (r) editPacketDoc(r.packet, r.doc); return; }
+    if (A("data-add-pdoc")) { editPacketDoc(find("docPackets", A("data-add-pdoc")), null); return; }
+    if (A("data-edit-packet")) { editPacket(find("docPackets", A("data-edit-packet"))); return; }
+    if (t.hasAttribute("data-add-packet")) { editPacket(null); return; }
+
     // ---- self drive ----
     if (t.hasAttribute("data-selfdrive")) { editSelfDrive(); return; }
 
@@ -658,6 +700,43 @@
     openForm("Edit reminder",
       [{ key: "title", label: "Reminder", type: "text" }, { key: "due", label: "Due date", type: "date" }, { key: "note", label: "Note", type: "textarea" }],
       a, (v) => { Object.assign(a, v); Store.commit(); });
+  }
+
+  /* ---- document checklists / packets ---- */
+  // token = "packetId:docId"; returns the doc (or {packet,doc} when withPacket)
+  function findPdoc(token, withPacket) {
+    const i = token.indexOf(":");
+    const pk = find("docPackets", token.slice(0, i));
+    if (!pk) return null;
+    const doc = (pk.docs || []).find((d) => d.id === token.slice(i + 1));
+    if (!doc) return null;
+    return withPacket ? { packet: pk, doc } : doc;
+  }
+  function editPacket(p) {
+    const isNew = !p;
+    openForm(isNew ? "Add checklist" : "Edit checklist",
+      [{ key: "title", label: "Title", type: "text" },
+       { key: "icon", label: "Icon (emoji)", type: "text", placeholder: "📋" },
+       { key: "when", label: "When / timing", type: "text", placeholder: "Apply during the trip" },
+       { key: "intro", label: "Process / notes", type: "textarea" }],
+      p || { icon: "📋" },
+      (v) => { if (isNew) { v.id = uid("dp"); v.docs = []; v.done = false; D().docPackets.push(v); } else Object.assign(p, v); Store.commit(); },
+      isNew ? null : () => { D().docPackets = D().docPackets.filter((x) => x !== p); Store.commit(); });
+  }
+  function editPacketDoc(packet, doc) {
+    if (!packet) return;
+    const isNew = !doc;
+    openForm(isNew ? "Add document" : "Edit document",
+      [{ key: "label", label: "Document / step", type: "text" },
+       { key: "status", label: "Status", type: "select", options: ["need", "have", "na"] },
+       { key: "note", label: "Note", type: "textarea" }],
+      doc || { status: "need" },
+      (v) => {
+        if (isNew) { v.id = uid("d"); (packet.docs = packet.docs || []).push(v); }
+        else Object.assign(doc, v);
+        Store.commit();
+      },
+      isNew ? null : () => { packet.docs = packet.docs.filter((x) => x !== doc); Store.commit(); });
   }
   function socialFields() {
     return [{ key: "title", label: "Title", type: "text" },
