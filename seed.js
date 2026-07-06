@@ -471,21 +471,9 @@ window.SEED = {
   ],
 
   /* ---- Draft emails (real numbers come from import) ----------------------- */
+  /* Note: the insurance DXB-transit cover-check email was removed once Crispin
+     Speers confirmed Worldwide + airside-transit cover in writing (29 Jun 2026). */
   emails: [
-    { id: "em_cover", title: "Insurance — DXB transit cover check", to: "",
-      toHint: "Crispin Speers / Canopius (your insurer's claims/servicing email)",
-      subject: "Travel policy [policy no.] — written confirmation of Worldwide cover & Dubai (DXB) transit for 27 Jul / 17 Aug 2026 travel",
-      body:
-"Dear Crispin Speers / Canopius team,\n\n" +
-"Policy number: [your policy number] (Employee Benefit Travel Insurance).\n\n" +
-"We are four UK-resident travellers flying London–Dubai–Trivandrum and back on 27 July and 17 August 2026 with Emirates (EK012/EK522 outbound, EK523/EK029 return). Both directions transit airside at Dubai International (DXB); we do not leave the airport or enter the UAE.\n\n" +
-"We note the policy excludes cover for travel \"to or within areas to which the FCDO advise against all or all but essential travel,\" and that the FCDO lifted its all-but-essential warning for the UAE on 18 June 2026, though the regional situation remains volatile and could change at short notice.\n\n" +
-"Please confirm IN WRITING:\n" +
-"1. That our geographical cover is Worldwide (we are travelling to India); and\n" +
-"2. That cover (including the airside Dubai transit) is valid for this trip, AND the position if the FCDO were to reinstate an all-but-essential advisory for the UAE while we are mid-trip.\n\n" +
-"We would be grateful for written confirmation to keep on file before we travel.\n\n" +
-"Kind regards,\n[Your name]" },
-
     { id: "em_homa", title: "Temple — Homa group entry & ages", to: "",
       toHint: "Sri Mookambika Temple help desk (booking / devaswom email)",
       subject: "Chandika Homa 04 Aug 2026 (ticket [ticket no.]) — group entry & age confirmation",

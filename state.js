@@ -13,6 +13,12 @@
   // collections the user edits / that a backup fully owns
   const EDITABLE = ["checklist", "social", "visits", "gifts", "budget", "finAdmin", "alerts", "contacts", "documents", "emails", "nriAccounts", "docPackets"];
 
+  // Retired seed items to actively REMOVE from saved/imported data. forwardMerge
+  // only adds by default, so obsolete items (e.g. a draft email whose task is
+  // done) would otherwise linger in a device's localStorage forever. Listed by
+  // collection → ids. em_cover: insurance DXB-transit cover confirmed 29 Jun 2026.
+  const RETIRED = { emails: ["em_cover"] };
+
   function clone(x) { return JSON.parse(JSON.stringify(x)); }
 
   // Take a saved/imported dataset as the base and layer on any *new* seed items
@@ -29,6 +35,10 @@
     });
     if (!data.meta) data.meta = clone(window.SEED.meta);
     if (!data.selfDrive) data.selfDrive = clone(window.SEED.selfDrive);
+    // drop retired items so obsolete entries can't linger in a device's storage
+    Object.keys(RETIRED).forEach((k) => {
+      if (Array.isArray(data[k])) data[k] = data[k].filter((it) => !(it && RETIRED[k].includes(it.id)));
+    });
     return data;
   }
 
