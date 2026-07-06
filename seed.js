@@ -188,9 +188,9 @@ window.SEED = {
 
   /* ---- Pre-trip checklist + OPEN verification tasks ----------------------- */
   checklist: [
-    { id: "v_fcdo", cat: "Verify", priority: "high", status: "open",
+    { id: "v_fcdo", cat: "Verify", priority: "high", status: "done",
       title: "Insurer confirmation: Worldwide cover + Dubai transit (post-advisory-lift)",
-      note: "UPDATE: FCDO LIFTED the all-but-essential UAE warning on 18 Jun 2026, so the transit-cover worry is largely resolved — but it is reversible 'at short notice'. Get WRITTEN insurer confirmation that (a) cover is Worldwide for India and (b) cover (incl. Dubai airside transit) still holds if the UAE advisory is reinstated while you are mid-trip. Keep monitoring gov.uk/foreign-travel-advice/united-arab-emirates." },
+      note: "✅ RESOLVED 29 Jun 2026 — Crispin Speers (Bethany Bradshaw) confirmed IN WRITING: Worldwide cover (excl. winter sports) for all 4 travellers. If the FCDO reinstates advice against UAE travel, underwriters have AGREED cover remains valid provided you only transit airside and do not leave the airport. Email saved under /travel insurance. Still glance at the FCDO page before travel (see monitor task)." },
     { id: "v_fcdo_monitor", cat: "Verify", priority: "high", status: "open",
       title: "Monitor FCDO UAE advisory before travel",
       note: "gov.uk/foreign-travel-advice/united-arab-emirates — re-check close to 27 Jul and 17 Aug." },
@@ -203,9 +203,9 @@ window.SEED = {
     { id: "v_hotel_occ", cat: "Verify", priority: "high", status: "open",
       title: "Hotel: confirm 13 occupancy + extra bedding",
       note: "Voucher records 10 pax across 5 Premium rooms but the group is 13. Confirm 13 occupancy and extra mattresses." },
-    { id: "v_geo", cat: "Verify", priority: "high", status: "open",
+    { id: "v_geo", cat: "Verify", priority: "high", status: "done",
       title: "Insurance: confirm geographical cover = Worldwide",
-      note: "India needs Worldwide (not European). Also note the policy covers only the 4 UK travellers." },
+      note: "✅ RESOLVED 29 Jun 2026 — CSP confirmed geographical cover = Worldwide (excl. winter sports), covering the 4 UK travellers only — NOT the 9 India relatives." },
     { id: "v_airspace", cat: "Verify", priority: "high", status: "open",
       title: "Gulf airspace / ceasefire status before the 17 Aug return",
       note: "The US–Iran ceasefire MoU (signed 17 Jun 2026) runs ~60 days to ~16 Aug 2026 — the day before the Dubai-transit return. Region is calmer (UAE FCDO warning lifted 18 Jun) but 'could resume at short notice'. Re-check the UAE advisory + Emirates operations near 17 Aug, and know Emirates' rebooking/reroute policy. Return fares are Saver (date change ≈ USD 25/pax)." },
@@ -340,6 +340,79 @@ window.SEED = {
       action: "Mostly not permitted for NRIs — POSB usually closed; NSC/KVP/SSY/MIS held to maturity then closed. Confirm scheme-by-scheme.", notes: "" },
   ],
 
+  /* ---- Document checklists & processes (PUBLIC / SCRUBBED) ----------------- */
+  /* Each packet = one admin task with the docs to gather + the process. Doc
+     status: 'need' | 'have' | 'na' (not required). Personal specifics (names,
+     passport numbers) live only in the private import. */
+  docPackets: [
+    {
+      id: "dp_visa", icon: "🛂", title: "UK visitor visa — Mother (apply from India)",
+      when: "Apply during the trip",
+      intro: "Standard Visitor visa (max 6 months), applied from India while she is here.\n\n➡ eVISA (2026): since 25 Feb 2026 the UK issues a DIGITAL eVisa — NO vignette sticker, and the passport is NOT surrendered for the processing period. She brings it to the VFS appointment (scanned there) and keeps it. She MUST create a UKVI account and view the eVisa before flying — carriers check permission digitally at check-in.\n\nProcess: 1) Apply + pay online at gov.uk (Standard Visitor). 2) Book biometrics at a VFS Global centre in India. 3) Attend VFS (biometrics + document scan; keep passport). 4) Decision ~3 weeks (priority available). 5) Sign in to the UKVI account to access the eVisa before travel.\n\nBiggest refusal risk = 'genuine visitor / intention to leave the UK'. Evidence strong ties to her home/residence and clear funding.",
+      docs: [
+        { id: "dv_pp", label: "Applicant's current passport (+ old passports for travel history)", status: "need", note: "Must stay valid for the whole visit. Bring to VFS; not surrendered under eVisa." },
+        { id: "dv_photo", label: "Digital photo / biometrics", status: "need", note: "Captured at the VFS centre." },
+        { id: "dv_form", label: "Online application + fee receipt (gov.uk)", status: "need", note: "Standard Visitor visa. Print the checklist/appointment confirmation." },
+        { id: "dv_res", label: "Proof of residence & ties to home country", status: "need", note: "Residence proof + reason she will leave the UK (property/family/onward plans). The key 'genuine visitor' evidence." },
+        { id: "dv_funds", label: "Applicant's financial evidence", status: "need", note: "Bank statements (usually 6 months) + pension / investments / property as proof of means." },
+        { id: "dv_cover", label: "Applicant's cover letter", status: "need", note: "Trip purpose, dates, who funds it, confirmation she will return home." },
+        { id: "dv_invite", label: "Sponsor invitation letter", status: "need", note: "From the host: relationship, dates, that he provides accommodation + support. Reuse/update the previous letter." },
+        { id: "dv_spstatus", label: "Sponsor UK immigration status — eVISA share code", status: "need", note: "UPDATED FOR 2026: BRPs are withdrawn. Generate a 'view & prove' share code from the sponsor's UKVI account — NOT the old BRP." },
+        { id: "dv_sppp", label: "Sponsor's passport (bio page + any visa)", status: "need", note: "Copy." },
+        { id: "dv_spaddr", label: "Sponsor's proof of UK address", status: "need", note: "Council tax / tenancy or mortgage / recent utility bill for the host address." },
+        { id: "dv_spwork", label: "Sponsor's employment letter + recent payslips", status: "need", note: "Employment letter + 3–6 months' payslips and matching bank statements." },
+        { id: "dv_rel", label: "Relationship proof (parent–child)", status: "need", note: "Not mandatory but supports a genuine visit — e.g. sponsor's birth certificate naming the applicant as parent." },
+        { id: "dv_ukvi", label: "Create UKVI account + view eVisa BEFORE travel", status: "need", note: "CRITICAL: no sticker is issued. Airlines check permission digitally — confirm the eVisa is visible before flying." },
+      ],
+      done: false,
+    },
+    {
+      id: "dp_kidspp", icon: "🛂", title: "Kids' Indian passport re-issue — document pack (PSK Trivandrum)",
+      when: "Apply ~28–29 Jul (Tatkal)",
+      intro: "Re-issue both children's Indian passports on Tatkal at PSK Thiruvananthapuram — the step-by-step process is in the Passport task list above. This card is the DOCUMENT pack to carry to the appointment.\n\n➡ Marriage certificate: NOT normally required for a minor re-issue when both parents' names already appear in the child's current passport and both parents attend — Annexure-D covers consent. Carry a copy only as backup.",
+      docs: [
+        { id: "dk_old", label: "Both children's ORIGINAL current passports", status: "need", note: "Returned cancelled after re-issue — carry home (UK visa vignette is in the old book)." },
+        { id: "dk_parpp", label: "Both parents' passports (original + self-attested copies)", status: "need", note: "Both parents attend → usually no police verification for minors." },
+        { id: "dk_annexd", label: "Annexure-D — parental consent (both parents sign)", status: "need", note: "Printed from the app draft; both parents sign." },
+        { id: "dk_addr", label: "Address proof for the India address", status: "need", note: "Parent's Aadhaar/passport showing the India address used on the form." },
+        { id: "dk_receipt", label: "Application ARN / appointment receipt", status: "need", note: "Printed from Passport Seva after applying + booking." },
+        { id: "dk_marriage", label: "Parents' marriage certificate (backup copy)", status: "na", note: "Not usually required for a minor re-issue when both parents' names are already in the child's passport. Carry a copy just in case." },
+        { id: "dk_birth", label: "Birth certificates", status: "na", note: "Not needed — both children born before Oct 2023." },
+        { id: "dk_evisa", label: "Update UKVI eVisa with new passport numbers", status: "need", note: "CRITICAL before flying 17 Aug — the eVisa does not auto-transfer." },
+      ],
+      done: false,
+    },
+    {
+      id: "dp_kidshealth", icon: "🩺", title: "Kids' check-up & vaccinations (in India)",
+      when: "Book early in the trip",
+      intro: "Optional health admin to do in India (often cheaper): general paediatric review, dental and eye checks, and any due immunisations. Bring UK records so anything given can be added to the GP record on return.\n\n➡ Note: travel insurance covers only the 4 UK travellers for EMERGENCIES, not elective/planned care — budget these out-of-pocket (Budget · Medical).",
+      docs: [
+        { id: "dh_records", label: "UK immunisation records (Red Book / GP history) for both kids", status: "need", note: "So the clinician knows what's due and matches the UK schedule." },
+        { id: "dh_appt", label: "Book paediatric / GP check-up appointment(s) in TVM", status: "need", note: "General review; note any ongoing issues." },
+        { id: "dh_dental", label: "Dental check-up (both kids)", status: "need", note: "Common to do in India for cost." },
+        { id: "dh_eye", label: "Eye test (both kids)", status: "need", note: "Update prescriptions/glasses if needed." },
+        { id: "dh_vax", label: "Due / travel vaccinations", status: "need", note: "Confirm what's due; get a signed record WITH vaccine name, batch no. and date so the UK GP can update the record." },
+        { id: "dh_meds", label: "Repeat prescriptions / medical history summary", status: "need", note: "Carry a current meds list for both children." },
+      ],
+      done: false,
+    },
+    {
+      id: "dp_ecctis", icon: "🎓", title: "ECCTIS statement — Spouse's BTech (India)",
+      when: "Gather documents in India",
+      intro: "ECCTIS (formerly UK NARIC / UK ENIC) Statement of Comparability — proves the Indian BTech (Computer Science) is comparable to a UK bachelor's degree (for UK employment / professional registration / some visa routes).\n\n➡ The APPLICATION is online (ecctis.com) and can be done from anywhere — but do it around the trip because the DOCUMENTS must come from the AWARDING UNIVERSITY (not the affiliated college). Obtain official university-issued copies while in India.\n\nProcess: 1) Collect the university degree certificate + official transcript/consolidated marksheet. 2) Scan as clear colour images (all 4 corners visible; JPEG/PDF/BMP; ≤5MB each). 3) Apply on the ECCTIS QLS portal, choose Statement of Comparability, pay. 4) Upload documents + passport + name-change evidence. 5) Receive the digital statement (standard ~10+ working days; fast-track available for a higher fee — check current price/timeframe).",
+      docs: [
+        { id: "ec_degree", label: "Degree certificate — from the AWARDING UNIVERSITY", status: "need", note: "Final BTech certificate issued by the university, NOT the affiliated college. Get an official copy from the university if needed." },
+        { id: "ec_transcript", label: "Official transcript / consolidated marksheet", status: "need", note: "All subjects + grades, signed, stamped and dated by the awarding university." },
+        { id: "ec_passport", label: "Passport copy", status: "need", note: "Current passport bio page." },
+        { id: "ec_name", label: "Name-change evidence (if degree name ≠ current name)", status: "need", note: "Marriage certificate or change-of-name deed — required if the name on the degree differs from the passport (e.g. a maiden name)." },
+        { id: "ec_scan", label: "Colour scans ready (all 4 corners, ≤5MB each)", status: "need", note: "JPEG / PDF / BMP; documents laid flat, all corners visible." },
+        { id: "ec_trans", label: "Certified translations", status: "na", note: "Not needed — Indian BTech documents are in English." },
+        { id: "ec_apply", label: "Apply + pay online at ecctis.com (Statement of Comparability)", status: "need", note: "If it's needed to meet a UK visa ENGLISH requirement, choose the English-proficiency / Visa & Nationality variant instead." },
+      ],
+      done: false,
+    },
+  ],
+
   /* ---- Alerts / reminders ------------------------------------------------- */
   alerts: [
     { id: "al_sd1", title: "SmartDelay: register EK012 (LGW→DXB)", due: "2026-07-26", kind: "smartdelay",
@@ -350,8 +423,8 @@ window.SEED = {
       note: "≥24h before the 17 Aug return." },
     { id: "al_sd4", title: "SmartDelay: register EK029 (DXB→LHR)", due: "2026-08-16", kind: "smartdelay",
       note: "≥24h before the 17 Aug return." },
-    { id: "al_fcdo", title: "FCDO/insurance check (DXB transit)", due: "2026-07-20", kind: "verify",
-      note: "UAE all-but-essential warning LIFTED 18 Jun 2026 (reversible). Get written confirmation of Worldwide cover + what happens if the advisory is reinstated mid-trip; keep monitoring." },
+    { id: "al_fcdo", title: "FCDO/insurance check (DXB transit)", due: "2026-07-20", kind: "verify", done: true,
+      note: "✅ CONFIRMED 29 Jun 2026 (CSP, in writing): Worldwide cover + airside-transit cover holds even if the UAE advisory is reinstated mid-trip. Still glance at the FCDO page before 27 Jul & 17 Aug." },
     { id: "al_passport", title: "Apply: kids' passport re-issue (Trivandrum, Tatkal)", due: "2026-07-29", kind: "admin",
       note: "Apply online + book the earliest PSK Trivandrum appointment in the first days of the trip; use Tatkal so the books dispatch before 17 Aug. Both parents + old passports + Annexure-D. Then update the UKVI eVisa with the new numbers." },
     { id: "al_monsoon", title: "Monsoon/landslide risk — Kollur leg (2–5 Aug)", due: "2026-08-01", kind: "warning",

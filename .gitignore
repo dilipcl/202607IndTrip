@@ -11,6 +11,10 @@ kerala2026-backup-*.json
 # Kept as a private local reference; never published.
 BUILD_REPORT.md
 
+# Portable trip briefing for pasting into another Claude session — contains PII
+# (names, passport numbers, financial detail). Private local reference; never published.
+TRIP_CONTEXT.md
+
 # Source PDFs (tickets, ERS, hotel, Homa, insurance) — keep these in Google
 # Drive, never in a public repo. These patterns also protect you if you ever
 # put the repo at the parent (Jul-India) folder level.

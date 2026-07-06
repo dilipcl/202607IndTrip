@@ -11,7 +11,7 @@
   const KEY = "kerala2026.v1";
   const subscribers = [];
   // collections the user edits / that a backup fully owns
-  const EDITABLE = ["checklist", "social", "visits", "gifts", "budget", "finAdmin", "alerts", "contacts", "documents", "emails", "nriAccounts"];
+  const EDITABLE = ["checklist", "social", "visits", "gifts", "budget", "finAdmin", "alerts", "contacts", "documents", "emails", "nriAccounts", "docPackets"];
 
   function clone(x) { return JSON.parse(JSON.stringify(x)); }
 
