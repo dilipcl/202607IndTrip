@@ -415,8 +415,8 @@ window.SEED = {
 
   /* ---- Alerts / reminders ------------------------------------------------- */
   alerts: [
-    { id: "al_sd1", title: "SmartDelay: register EK012 (LGW→DXB)", due: "2026-07-26", kind: "smartdelay",
-      note: "Register ≥24h before departure at csp.smartdelay.com/csp using your policy number." },
+    { id: "al_sd1", title: "SmartDelay: register EK012 (LGW→DXB)", due: "2026-07-26", kind: "smartdelay", done: true,
+      note: "✅ Registered in the CSP portal (22 Jul 2026) for EK012 dep 09:05." },
     { id: "al_sd2", title: "SmartDelay: register EK522 (DXB→TRV)", due: "2026-07-26", kind: "smartdelay",
       note: "Each flight registered separately, ≥24h before." },
     { id: "al_sd3", title: "SmartDelay: register EK523 (TRV→DXB)", due: "2026-08-16", kind: "smartdelay",
