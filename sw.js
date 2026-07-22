@@ -1,6 +1,6 @@
 /* Service worker — caches the app shell so it works fully offline once loaded.
    Bump CACHE when any shell file changes. */
-const CACHE = "kerala2026-v9";
+const CACHE = "kerala2026-v10";
 const SHELL = [
   "./",
   "./index.html",
