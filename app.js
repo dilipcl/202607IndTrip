@@ -879,7 +879,7 @@
   function editNri(a) {
     const isNew = !a;
     openForm(isNew ? "Add account" : "Edit account",
-      [{ key: "holder", label: "Holder", type: "select", options: ["", "Dilip", "Lekshmy", "Joint"] },
+      [{ key: "holder", label: "Holder", type: "select", options: ["", "Self", "Spouse", "Joint"] },
        { key: "kind", label: "Type", type: "select", options: ["Savings/Current", "FD", "Mutual Fund", "Shares/Demat", "Bond/SGB", "Loan", "Credit Card", "PPF", "Post Office", "NPS", "Pension", "Insurance", "Crypto", "Other"] },
        { key: "institution", label: "Institution", type: "text" },
        { key: "ref", label: "Account / folio (optional)", type: "text" },
