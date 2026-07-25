@@ -473,10 +473,55 @@
   }
 
   /* ============================================================ DOCS */
+  // Offline-copy buttons for one document row (works with no internet once saved).
+  function offlineCtl(id) {
+    if (!window.DocStore || !DocStore.available) return "";
+    return DocStore.has(id)
+      ? `<button class="btn gold sm" data-open-doc="${esc(id)}">📄 Open offline</button>`
+        + `<span class="chip" style="margin-left:6px">✓ saved</span>`
+        + `<button class="linkbtn" data-remove-doc="${esc(id)}" style="margin-left:6px">remove</button>`
+      : `<button class="btn ghost sm" data-attach-doc="${esc(id)}">📎 Add offline copy</button>`;
+  }
+
+  // The airport-critical documents, in the order you'll reach for them.
+  const AIRPORT_DOCS = [
+    { g: "Boarding & check-in", ids: ["d_bp_out", "d_bp_ret", "d_checkin"] },
+    { g: "India entry — Air Suvidha (show on arrival)", ids: ["d_as_reg", "d_as_c1", "d_as_c2", "d_as_c3"] },
+    { g: "Passports & UK visas", ids: ["d_id1", "d_id2", "d_id3", "d_id4"] },
+    { g: "Emirates e-tickets", ids: ["d_ek1", "d_ek2", "d_ek3", "d_ek4"] },
+    { g: "Insurance (airside-transit cover)", ids: ["d_csp_cover", "d_ins", "d_sd"] },
+  ];
+
+  function renderAirportPack() {
+    const byId = {}; D().documents.forEach((x) => (byId[x.id] = x));
+    const saved = AIRPORT_DOCS.reduce((n, s) => n + s.ids.filter((i) => window.DocStore && DocStore.has(i)).length, 0);
+    const total = AIRPORT_DOCS.reduce((n, s) => n + s.ids.length, 0);
+    let h = `<div class="card" style="border:1px solid var(--gold)">
+      <h3>🛂 Airport offline pack</h3>
+      <div class="tiny muted" style="margin:-2px 0 8px">Attach a copy of each document once — it then opens with <b>no internet</b>. Saved on this device only, never uploaded. <b>${saved}/${total} saved.</b></div>`;
+    if (!window.DocStore || !DocStore.available) {
+      h += `<div class="flag">This browser can't store offline copies. Keep the PDFs available offline in your phone's Files/Drive app and carry printouts.</div></div>`;
+      return h;
+    }
+    AIRPORT_DOCS.forEach((sec) => {
+      h += `<div class="small" style="margin:8px 0 2px"><b>${esc(sec.g)}</b></div>`;
+      sec.ids.forEach((id) => {
+        const doc = byId[id];
+        if (!doc) return;
+        h += `<div class="doc-row" style="flex-wrap:wrap;gap:4px">
+          <span class="k" style="flex:1 1 100%">${esc(doc.label)}</span>
+          <span class="v" style="flex:1 1 100%;justify-content:flex-start">${offlineCtl(id)}</span></div>`;
+      });
+    });
+    h += `<div class="tiny muted" style="margin-top:8px">Backup plan: also mark these <b>Available offline</b> in the Google Drive app and carry printouts. The Air Suvidha form must be shown at the health/immigration desk on arrival.</div></div>`;
+    return h;
+  }
+
   function renderDocs() {
     const d = D();
     const docRow = (k, v) => v ? `<div class="doc-row"><span class="k">${esc(k)}</span><span class="v">${v}</span></div>` : "";
     let h = `<div class="section-title">Documents quick-reference</div>`;
+    h += renderAirportPack();
 
     h += `<div class="card"><h3>✈ Flights · ${esc(d.meta.bookingRef)}</h3>`;
     d.flightTickets.forEach((t) => {
@@ -528,13 +573,15 @@
       h += `<div class="small" style="margin:8px 0 2px"><b>${esc(g)}</b></div>`;
       groups[g].forEach((doc) => {
         const href = doc.driveLink || doc.localLink;
-        h += `<div class="doc-row">
-          <span class="k" style="flex:1">${href ? `<a href="${esc(href)}" target="_blank" rel="noopener">${esc(doc.label)} ↗</a>` : esc(doc.label)}
-            ${doc.driveLink ? '<span class="chip" style="margin-left:6px">Drive</span>' : '<span class="tiny muted">local</span>'}</span>
-          <button class="linkbtn" data-edit-doc="${esc(doc.id)}">link</button></div>`;
+        h += `<div class="doc-row" style="flex-wrap:wrap;gap:4px">
+          <span class="k" style="flex:1 1 60%">${href ? `<a href="${esc(href)}" target="_blank" rel="noopener">${esc(doc.label)} ↗</a>` : esc(doc.label)}
+            ${doc.driveLink ? '<span class="chip" style="margin-left:6px">Drive</span>' : (window.DocStore && DocStore.has(doc.id) ? '<span class="chip" style="margin-left:6px">✓ offline</span>' : '')}</span>
+          <button class="linkbtn" data-edit-doc="${esc(doc.id)}">link</button>
+          <span class="v" style="flex:1 1 100%;justify-content:flex-start">${offlineCtl(doc.id)}</span></div>`;
       });
     });
-    h += `<div class="tiny muted" style="margin-top:8px">Tap <b>📂 Open Google Drive</b>, find a file, do <b>Share → Copy link</b>, then tap <b>link</b> on that row and paste it (a full URL or just the file ID both work). It then opens on your phone too.</div></div>`;
+    h += `<input type="file" id="docFile" accept="application/pdf,image/*" style="display:none">`;
+    h += `<div class="tiny muted" style="margin-top:8px"><b>Add offline copy</b> = pick the PDF once; it opens with no internet, stored on this device only (great for the airport). <b>link</b> = paste a Google Drive <b>Share → Copy link</b> URL to also open it online from any device.</div></div>`;
 
     // ---- Draft emails ----
     h += `<div class="section-title">Emails to send</div>`;
@@ -603,7 +650,7 @@
       + "[data-toggle-alert],[data-edit-alert],[data-add-day],[data-edit-social],[data-add-social],"
       + "[data-edit-visit],[data-add-visit],[data-toggle-visit],[data-edit-gift],[data-add-gift],"
       + "[data-toggle-gift-p],[data-toggle-gift-k],[data-edit-budget],[data-add-budget],[data-toggle-fin],"
-      + "[data-rate],[data-selfdrive],[data-edit-contact],[data-edit-doc],[data-edit-email],[data-copy-email],"
+      + "[data-rate],[data-selfdrive],[data-edit-contact],[data-edit-doc],[data-attach-doc],[data-open-doc],[data-remove-doc],[data-edit-email],[data-copy-email],"
       + "[data-toggle-nri],[data-edit-nri],[data-add-nri],"
       + "[data-toggle-pdoc],[data-edit-pdoc],[data-add-pdoc],[data-edit-packet],[data-add-packet],"
       + "[data-export],[data-import],[data-reset]");
@@ -669,6 +716,40 @@
 
     // ---- documents & emails ----
     if (A("data-edit-doc")) { editDoc(find("documents", A("data-edit-doc"))); return; }
+    if (A("data-attach-doc")) {
+      const id = A("data-attach-doc");
+      const f = $("#docFile");
+      if (!f) return;
+      f.value = "";
+      f.onchange = () => {
+        const file = f.files && f.files[0];
+        if (file) {
+          DocStore.put(id, file)
+            .then(() => { toast("Saved offline ✓"); render(); })
+            .catch((err) => { console.warn("Offline save failed", err); toast("Couldn't save — try a smaller file"); });
+        }
+      };
+      f.click();
+      return;
+    }
+    if (A("data-open-doc")) {
+      const id = A("data-open-doc");
+      const win = window.open("", "_blank");   // grabbed inside the user gesture so mobile doesn't block it
+      DocStore.get(id).then((rec) => {
+        if (!rec || !rec.blob) { if (win) win.close(); toast("No offline copy saved yet"); return; }
+        const url = URL.createObjectURL(rec.blob);
+        if (win) win.location = url;
+        else { const a = document.createElement("a"); a.href = url; a.target = "_blank"; a.rel = "noopener"; a.click(); }
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+      }).catch((err) => { if (win) win.close(); console.warn(err); toast("Couldn't open offline copy"); });
+      return;
+    }
+    if (A("data-remove-doc")) {
+      const id = A("data-remove-doc");
+      if (!confirm("Remove this document's offline copy from this device?")) return;
+      DocStore.remove(id).then(() => { toast("Offline copy removed"); render(); });
+      return;
+    }
     if (A("data-edit-email")) { editEmail(find("emails", A("data-edit-email"))); return; }
     if (A("data-copy-email")) {
       const em = find("emails", A("data-copy-email"));
@@ -886,7 +967,11 @@
   if (!App.visitsTab) App.visitsTab = "visits";
   render();
 
-  // ask the browser to keep our localStorage durable (reduces eviction, esp. iOS)
+  // learn which docs already have an offline copy, then repaint so badges show
+  if (window.DocStore && DocStore.available) DocStore.ready().then(() => render()).catch(() => {});
+
+  // ask the browser to keep our storage durable (reduces eviction of localStorage
+  // AND the IndexedDB offline documents, especially on iOS)
   if (navigator.storage && navigator.storage.persist) {
     navigator.storage.persisted().then((p) => { if (!p) navigator.storage.persist().catch(() => {}); }).catch(() => {});
   }

@@ -16,13 +16,20 @@ you add or edit is saved on your phone.
 - **💷 Budget** — planned vs actual, **dual currency ₹/£** with an editable rate, per-line bars and roll-up totals, plus financial-admin tasks.
 - **📄 Docs** — booking ref, all 6 PNRs, seats, Homa/hotel/insurance numbers, tappable contacts, **links to every source document**, ready-to-send **draft emails**, and **Export / Import / Reset**.
 
-### Document links
-The Docs tab lists every source PDF (tickets, ERS, hotel, Homa, insurance). Each has a
-**working local link** (opens the actual file when the app runs from this Google Drive
-folder on a computer) and a **“link” button** where you can paste that file's Google
-Drive *Share → Copy link* URL so it opens on your phone too. *(I couldn't auto-fetch
-the Drive URLs — this session's Drive access wasn't authorised for it — so they're left
-for you to paste once and they persist.)*
+### Document links & offline copies
+The Docs tab lists every source PDF (tickets, ERS, hotel, Homa, insurance). Each row has two
+independent ways to reach the file:
+
+- **📎 Add offline copy** — pick the PDF once and it's saved *on this device* (in IndexedDB,
+  never uploaded, never in the backup or repo). It then **opens with no internet** — the point
+  of the **🛂 Airport offline pack** card at the top of Docs, which gathers the airport-critical
+  documents (boarding passes, Air Suvidha self-declarations, passports + UK visas, e-tickets,
+  insurance) so you can show them at the gate / immigration even with no airport signal.
+- **link** — paste that file's Google Drive *Share → Copy link* URL to also open it online from
+  any device. Optional, and needs internet.
+
+Offline copies live only in the browser that saved them, so add them on the phone you'll carry,
+and keep the same PDFs marked *Available offline* in the Google Drive/Files app as a backup.
 
 ### Draft emails
 The Docs tab also holds ready drafts for the open verification items — **insurance

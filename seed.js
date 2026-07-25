@@ -222,6 +222,8 @@ window.SEED = {
     { id: "c_adapters", cat: "Pack", priority: "normal", status: "open", title: "Plug adapters (UK → India type D/M)" },
     { id: "c_docs", cat: "Pack", priority: "normal", status: "open", title: "Physical document prints",
       note: "Print: e-tickets, all 6 train ERS, Homa ticket, hotel voucher, insurance certificate, passports/visas." },
+    { id: "c_offline", cat: "Pack", priority: "high", status: "open", title: "Save OFFLINE copies of every airport document",
+      note: "In the app: Docs → 🛂 Airport offline pack → tap 'Add offline copy' on each row and attach the file. These then open with NO internet — vital if the airport wifi/signal is poor. Attach: boarding passes (out + return), the Air Suvidha SDF for all 4 travellers, passports + UK visas, the Emirates e-tickets, and the insurance/CSP airside-cover email.\n\nBelt-and-braces (don't skip): also mark them 'Available offline' in the phone's Google Drive/Files app, AND carry printouts. The Air Suvidha SDF must be shown at the health/immigration desk on arrival in India, and boarding passes at DXB." },
     { id: "c_scale", cat: "Pack", priority: "normal", status: "open", title: "Portable baggage scale",
       note: "For the 16 Aug audit — 30kg checked + cabin 115cm linear on the India-boarding return." },
     { id: "c_ids", cat: "Pack", priority: "normal", status: "open", title: "Original photo ID for every train passenger",
@@ -433,6 +435,8 @@ window.SEED = {
       note: "✅ CONFIRMED 29 Jun 2026 (CSP, in writing): Worldwide cover + airside-transit cover holds even if the UAE advisory is reinstated mid-trip. Still glance at the FCDO page before 27 Jul & 17 Aug." },
     { id: "al_gulf_out", title: "Gulf airspace/FCDO check — 27 Jul outbound Dubai transit", due: "2026-07-25", kind: "verify", done: true,
       note: "✅ CHECKED 24 Jul 2026 at source. FCDO UAE unchanged since 13 Jul — still NO advise-against-travel, so the policy's FCDO exclusion is not triggered. EASA CZIB-2026-07R1 was extended on 22 Jul to run to 31 AUG (was 29 Jul), but it binds EASA-regulated operators, not Emirates: DXB is operating normally, Emirates is flying ~90% of schedule under 'reduced operations'. Verdict: fly as planned; the exposure is DELAY at DXB, not cancellation. Re-check Emirates status the night before. Rebooking if needed: outbound is Flex, change USD 150. CSP confirmed cover holds for airside-only transit." },
+    { id: "al_fcdo_25jul", title: "⚠ Re-check FCDO UAE advisory + Emirates status the night before you fly", due: "2026-07-26", kind: "verify",
+      note: "UPDATE 25 Jul 2026 — the picture moved again since the 24 Jul check. The gov.uk UAE page was updated 24 Jul and now explicitly warns to 'be prepared for possible flight cancellations, periodic airspace closures and travel disruption', and several UK/travel outlets report the FCDO STRENGTHENED its UAE advice around 24 Jul toward 'advise against all but essential travel'. VERIFY THE LIVE LEVEL YOURSELF at gov.uk/foreign-travel-advice/united-arab-emirates before the 27 Jul flight — don't rely on this note.\n\nWhy it matters: the policy's FCDO exclusion only bites if the FCDO advises against all / all-but-essential travel. IF it now does, you are still covered — CSP confirmed IN WRITING (29 Jun 2026) that cover holds for AIRSIDE-ONLY Dubai transit even with the advisory reinstated, PROVIDED you do not leave the airport. So at DXB: stay airside, do not exit immigration, and keep the CSP cover email as an OFFLINE copy.\n\nAlso the night before: check Emirates status for EK012/EK522 (DXB is operating; Emirates a UAE carrier is not grounded by the EASA airspace notice, but expect DELAY). Outbound is Flex (change USD 150); all four legs are on SmartDelay (pays from 120 min)." },
     { id: "al_passport", title: "PSK Trivandrum — report 14:30 (both children)", due: "2026-07-30", kind: "admin",
       note: "Booked 23 Jul for Thu 30 Jul, reporting 14:30, PSK Vazhuthacaud (Carmel Towers, opp. Cotton Hill Girls High School). Both parents attend. Carry: children's original passports, parents' passports + self-attested copies, address proof, signed Annexure-D per child, printed application receipt per ARN. Keep the afternoon clear — move the NRI bank/MF visits to the morning." },
     { id: "al_pp_old", title: "⚠ Ask PSK: do the OLD passports stay valid for 17 Aug?", due: "2026-07-30", kind: "warning",
@@ -480,6 +484,21 @@ window.SEED = {
     { id: "d_ins", group: "Insurance", label: "Travel policy wording 2026", localLink: "", driveLink: "" },
     { id: "d_ipid", group: "Insurance", label: "Insurance product summary (IPID)", localLink: "", driveLink: "" },
     { id: "d_sd", group: "Insurance", label: "SmartDelay leaflet", localLink: "", driveLink: "" },
+    { id: "d_csp_cover", group: "Insurance", label: "CSP airside-transit cover confirmation (email, 29 Jun)", localLink: "", driveLink: "" },
+
+    /* Airport-critical rows — attach an OFFLINE copy to each (see the Airport
+       offline pack card). Labels are deliberately generic (no names/PII). */
+    { id: "d_bp_out", group: "Boarding & check-in", label: "Boarding passes — outbound 27 Jul (all travellers)", localLink: "", driveLink: "" },
+    { id: "d_bp_ret", group: "Boarding & check-in", label: "Boarding passes — return 17 Aug (check-in ~16 Aug)", localLink: "", driveLink: "" },
+    { id: "d_checkin", group: "Boarding & check-in", label: "Online check-in confirmation", localLink: "", driveLink: "" },
+    { id: "d_as_reg", group: "India entry — Air Suvidha", label: "Air Suvidha self-declaration — lead registration", localLink: "", driveLink: "" },
+    { id: "d_as_c1", group: "India entry — Air Suvidha", label: "Air Suvidha self-declaration — co-passenger 1", localLink: "", driveLink: "" },
+    { id: "d_as_c2", group: "India entry — Air Suvidha", label: "Air Suvidha self-declaration — co-passenger 2", localLink: "", driveLink: "" },
+    { id: "d_as_c3", group: "India entry — Air Suvidha", label: "Air Suvidha self-declaration — co-passenger 3", localLink: "", driveLink: "" },
+    { id: "d_id1", group: "Passports & visas", label: "Passport + UK visa — Traveller 1", localLink: "", driveLink: "" },
+    { id: "d_id2", group: "Passports & visas", label: "Passport + UK visa — Traveller 2", localLink: "", driveLink: "" },
+    { id: "d_id3", group: "Passports & visas", label: "Passport + UK visa — Traveller 3", localLink: "", driveLink: "" },
+    { id: "d_id4", group: "Passports & visas", label: "Passport + UK visa — Traveller 4", localLink: "", driveLink: "" },
   ],
 
   /* ---- Draft emails (real numbers come from import) ----------------------- */
