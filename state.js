@@ -21,10 +21,33 @@
 
   function clone(x) { return JSON.parse(JSON.stringify(x)); }
 
+  // One-time id migration: the passenger ids used to embed real first names
+  // (p_dilip, p_lekshmy, …). They were renamed to neutral slugs (p_t1..p_t4,
+  // p_r1..p_r9) so no personal name lives in the public code. Older localStorage
+  // / exported backups still carry the old ids — both as the passengers' own ids
+  // AND as references (flight tickets, train seats). Every occurrence in JSON is a
+  // quoted string, so a quoted-token swap on the serialized data fixes the record
+  // and all cross-references at once, and stops forwardMerge from re-adding the
+  // seed passengers as duplicates. Idempotent: on already-migrated data the old
+  // tokens are simply absent, so this is a no-op and safe to keep permanently.
+  const ID_MIGRATION = {
+    p_dilip: "p_t1", p_lekshmy: "p_t2", p_tejas: "p_t3", p_saanvi: "p_t4",
+    p_binoj: "p_r1", p_leela: "p_r2", p_sylaja: "p_r3", p_lalitha: "p_r4",
+    p_renjith: "p_r5", p_divya: "p_r6", p_sreedevi: "p_r7", p_tanvi: "p_r8",
+    p_siddharth: "p_r9",
+  };
+  function migrateIds(obj) {
+    let s = JSON.stringify(obj);
+    Object.keys(ID_MIGRATION).forEach((oldId) => {
+      s = s.split('"' + oldId + '"').join('"' + ID_MIGRATION[oldId] + '"');
+    });
+    return JSON.parse(s);
+  }
+
   // Take a saved/imported dataset as the base and layer on any *new* seed items
   // without ever clobbering the saved (real) data. Used on reload and on import.
   function forwardMerge(saved) {
-    const data = clone(saved);
+    const data = clone(migrateIds(saved));
     // forward-compat: add any brand-new top-level keys the backup predates
     Object.keys(window.SEED).forEach((k) => { if (!(k in data)) data[k] = clone(window.SEED[k]); });
     // for editable collections, append seed items whose id isn't already present
