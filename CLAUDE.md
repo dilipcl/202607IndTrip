@@ -85,9 +85,9 @@ mobile-first theme.
 - New user-editable items get ids via `uid(prefix)` in `app.js`; seed items have stable
   hand-written ids that the merge logic depends on — don't rename them. Passenger ids are the
   neutral `p_t1`..`p_t4` (UK travellers) and `p_r1`..`p_r9` (relatives) — deliberately name-free
-  so nothing personal lives in the public code. (They were once name slugs like `p_dilip`; the
-  private import file was converted to the new ids in step with the rename, so there is no
-  migration shim in the code.)
+  so nothing personal lives in the public code. (They were once first-name slugs; the private
+  import file was converted to the new ids in step with the rename, so there is no migration
+  shim in the code.)
 - Business rules (transport locking, scheduling warnings, derived flags) live in `engine.js`,
   not scattered in the UI. Add new rules there.
 - `BUILD_REPORT.md` documents data provenance and known ticket/document mismatches;
