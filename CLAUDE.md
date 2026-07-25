@@ -83,11 +83,11 @@ mobile-first theme.
 - Dates are ISO `YYYY-MM-DD` strings throughout; always parse via `Engine.parse()` (local time),
   never `new Date(iso)` (UTC).
 - New user-editable items get ids via `uid(prefix)` in `app.js`; seed items have stable
-  hand-written ids that the merge logic depends on — don't rename them casually. If a rename
-  is unavoidable (e.g. the passenger ids were changed from name slugs like `p_dilip` to neutral
-  `p_t1`/`p_r1` for public hosting), you MUST also add the old→new pair to `ID_MIGRATION` in
-  `state.js`; `migrateIds()` rewrites old ids in saved/imported data (record ids *and* all
-  cross-references) so nothing duplicates on merge.
+  hand-written ids that the merge logic depends on — don't rename them. Passenger ids are the
+  neutral `p_t1`..`p_t4` (UK travellers) and `p_r1`..`p_r9` (relatives) — deliberately name-free
+  so nothing personal lives in the public code. (They were once name slugs like `p_dilip`; the
+  private import file was converted to the new ids in step with the rename, so there is no
+  migration shim in the code.)
 - Business rules (transport locking, scheduling warnings, derived flags) live in `engine.js`,
   not scattered in the UI. Add new rules there.
 - `BUILD_REPORT.md` documents data provenance and known ticket/document mismatches;

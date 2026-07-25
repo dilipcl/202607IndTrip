@@ -1,8 +1,9 @@
 # ── NEVER commit personal data ──────────────────────────────────────────────
 # Your real trip data (import it on your device instead — see README).
 my-trip-data.private.json
-*.private.json
+*.private.json*
 *.private.js
+*.bak
 
 # App backups exported from the Docs → Data screen.
 kerala2026-backup-*.json
